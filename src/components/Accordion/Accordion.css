@@ -1,0 +1,53 @@
+:root {
+  --content-padding: 14px;
+  --accrdion-font-size: 14px;
+  --accordion-font-color: white;
+  --accordion-bg-color: #16a085;
+  --accordion-item-br-color: green;
+  --accordion-content-bg-color: #1abc9c;
+}
+
+.accordion-item__toggle {
+  border-bottom: 1px solid var(--accrodion-item-br-color);
+  border: none;
+  text-align: left;
+  display: block;
+  font-size: var(--accrdion-font-size);
+  background-color: var(--accordion-bg-color);
+  color: var(--accordion-font-color);
+  padding: var(--content-padding);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.accordion-item__content {
+  height: 0;
+  overflow: hidden;
+  transition: height .3s ease;  
+  padding: 0;
+  background: var(--accordion-content-bg-color);
+  color: var(--accordion-font-color);
+  text-align: left;
+}
+
+.accordion-item__inner {
+  padding: var(--content-padding);
+}
+
+.accordion-item__icon {
+  fill: currentColor;
+  transition: transform .3s ease;
+}
+
+.accordion-item.is-open .accordion-item__icon{
+  transform: rotate(180deg);
+}
+
+.no-transition {
+  transition: none !important;
+}
+
+/* 02031377005 - Sarah 16th july */
+
