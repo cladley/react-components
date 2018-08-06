@@ -95,12 +95,16 @@ class Item extends Component {
 export default class Accordion extends Component {
   static Item = Item;
 
+  static defaultProps = {
+    onItemToggle: () => { console.log('default called') }
+  };
+
   state = {
     items: []
   };
 
   onItemToggle = (id) => {
-
+    this.props.onItemToggle();
   };
 
   render() {

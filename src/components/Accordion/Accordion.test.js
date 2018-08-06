@@ -45,9 +45,18 @@ describe('<Accordion />', () => {
     expect(itemsWrapper.last().props().id).toBeDefined();
   });
 
-
   describe('User clicks first accordion item', () => {
+    let onToggle;
     beforeEach(() => {
+      onToggle = jest.fn();
+      accordionWrapper =  mount(<Accordion onItemToggle={onToggle}>
+        <Accordion.Item title="Toggle 1">
+          Test Content 1
+        </Accordion.Item>
+        <Accordion.Item title="Toggle 2">
+          Test Content 2
+        </Accordion.Item>
+      </Accordion>);
       const accordionToggle = accordionWrapper.find('.accordion-item__toggle').first();
       accordionToggle.simulate('click');
     });
@@ -55,6 +64,10 @@ describe('<Accordion />', () => {
     it('should add "is-open" class to "accordion-item"', () => {
       const itemWrapper = accordionWrapper.find('.accordion-item').first();
       expect(itemWrapper.hasClass('is-open')).toBe(true);
+    });
+
+    it('should call onItemToggle callback property', () => {
+      expect(onToggle.mock.calls.length).toBe(1);
     });
   });
 });
