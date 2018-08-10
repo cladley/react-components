@@ -3,3 +3,21 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+
+.content {
+  max-width: 460px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+.content img {
+  width: 100%;
+}
+
+.content .yooo {
+  float: right;
+  width: 200px;
+  margin: 20px;
+}

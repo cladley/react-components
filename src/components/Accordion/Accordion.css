@@ -41,7 +41,7 @@
   transition: transform .3s ease;
 }
 
-.accordion-item.is-open .accordion-item__icon{
+.accordion-item.is-open .accordion-item__icon {
   transform: rotate(180deg);
 }
 
@@ -51,3 +51,5 @@
 
 /* 02031377005 - Sarah 16th july */
 
+/* 01173006449 - Tom  this morning */
+/* 07943744506 - Jenny ? */
