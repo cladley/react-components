@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import Backdrop from './Backdrop';
+import './popoutimage.css';
 
 const getWindowCentre = () => {
   return {
@@ -83,8 +84,8 @@ class ExpandedImage extends Component {
     }, 10);
   }
 
-  render() {
-    const { dimensions, scrollPosition, src, translate, scale } = this.state;
+  getExpandedImageStyle() {
+    const { dimensions, scrollPosition, translate, scale } = this.state;
 
     let styles = {
       position: "absolute",
@@ -99,11 +100,7 @@ class ExpandedImage extends Component {
       styles = Object.assign({}, styles, {
         transition: `transform ${this.props.animationSpeed}ms ease`
       });
-
-      setTimeout(() => {
-        this.props.onClosed();
-      }, this.props.animationSpeed);
-    } else if(this.state.isExpanded) {
+    } else if (this.state.isExpanded) {
       styles = Object.assign({}, styles, {
         transition: `transform ${this.props.animationSpeed}ms ease`,
         transform: `translate(${translate.x}px, ${
@@ -111,6 +108,18 @@ class ExpandedImage extends Component {
         }px) scale(${scale})`
       });
     }
+
+    return styles
+  }
+
+  render() {
+    let styles = this.getExpandedImageStyle();
+
+    if (this.props.isClosing) {
+      setTimeout(() => {
+        this.props.onClosed();
+      }, this.props.animationSpeed);
+    } 
 
     const imageSrc = this.props.imageLoaded ? this.props.largeSrc : this.props.src;
 
@@ -160,6 +169,7 @@ export default class PopoutImage extends Component {
   };  
 
   render() {
+    const className = this.props.className ? `popout-image ${this.props.className}` : "popout-image";
     return (
       <React.Fragment>
         {this.state.isOpen ? <Backdrop animationSpeed={this.props.animationSpeed} isClosing={this.state.isClosing} onBackdropClick={this.handleBackdropClick} /> : null}
@@ -167,6 +177,7 @@ export default class PopoutImage extends Component {
 
         <img
           {...this.props}
+          className={className}
           ref={instance => (this.image = instance)}
           onClick={this.expandImage}
           src={this.props.src}

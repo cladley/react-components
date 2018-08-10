@@ -1,14 +1,14 @@
-import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import PropTypes from "prop-types";
 import "./backdrop.css";
 
 export default class Backdrop extends Component {
   static propTypes = {
     onBackdropClick: PropTypes.func
   };
-  
-  state = {
+
+  state = { 
     isClosing: false
   };
 
@@ -20,8 +20,8 @@ export default class Backdrop extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.isClosing !== nextProps.isClosing) {
-      if (nextProps.isClosing) {        
-        this.backdropElement.classList.remove('fade-in');
+      if (nextProps.isClosing) {
+        this.backdropElement.classList.remove("fade-in");
       }
     }
   }
