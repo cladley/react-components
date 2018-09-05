@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
 const getWindowCentre = () => {
+  const width = document.documentElement.clientWidth || document.body.clientWidth;
+
   return {
-    x: window.innerWidth / 2,
+    x: width / 2,
     y: window.innerHeight / 2
   };
 };
@@ -49,7 +51,7 @@ export default class ExpandedImage extends Component {
       dimensions: dimensions,
       scrollPosition: window.pageYOffset,
       translate: calculateTranslate(dimensions),
-      scale: calculateScale(dimensions, .8),
+      scale: calculateScale(dimensions, 0.8),
       isExpanded: false,
       imageLoaded: false
     };

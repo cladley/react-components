@@ -4,8 +4,13 @@ import ExpandedImage from "./ExpandedImage";
 import Backdrop from "./Backdrop";
 import "./popoutimage.css";
 
-
 export default class PopoutImage extends Component {
+  constructor(props) {
+    super(props);
+    this.lastScrollPosition = 0;
+    this.ticking = false;
+  }
+
   static propTypes = {
     src: PropTypes.string.isRequired,
     largeSrc: PropTypes.string,
@@ -24,10 +29,28 @@ export default class PopoutImage extends Component {
     isClosing: false
   };
 
+  handleWindowScroll = () => {
+    const scrollAmount = window.scrollY - this.lastScrollPosition;
+    this.lastScrollPosition = window.scrollY;
+
+    if (Math.abs(scrollAmount) > 2) {
+      this.handleBackdropClick();
+    } else {
+      if (!this.ticking) {
+        window.requestAnimationFrame(() => {
+          this.ticking = false;
+        });
+      }
+      this.ticking = true;
+    }   
+  };
+
   expandImage = e => {
     this.setState({
       isOpen: true
     });
+
+    window.addEventListener('scroll', this.handleWindowScroll);
   };
 
   handleBackdropClick = () => {
@@ -41,12 +64,19 @@ export default class PopoutImage extends Component {
       isClosing: false,
       isOpen: false
     });
+
+    window.removeEventListener('scroll', this.handleWindowScroll);
   };
 
   render() {
-    const className = this.props.className
+    let className = this.props.className
       ? `popout-image ${this.props.className}`
       : "popout-image";
+
+    className = this.state.isOpen 
+      ? `${className} is-hidden` 
+      : className;
+
     return (
       <React.Fragment>
         {this.state.isOpen ? (
@@ -54,7 +84,7 @@ export default class PopoutImage extends Component {
             animationSpeed={this.props.animationSpeed}
             isClosing={this.state.isClosing}
             onBackdropClick={this.handleBackdropClick}
-          />
+          />  
         ) : null}
         {this.state.isOpen ? (
           <ExpandedImage
