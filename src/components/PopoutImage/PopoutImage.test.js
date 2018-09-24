@@ -83,7 +83,7 @@ describe('<PopoutImage />', () => {
     it('should render an ExpandedImage component', () => {
       const expandedImage = wrapper.find('ExpandedImage');
       expect(expandedImage).toBeDefined();
-      console.log(wrapper.debug());
+      // console.log(wrapper.debug());
     });
 
   });

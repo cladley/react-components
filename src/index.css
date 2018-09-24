@@ -4,6 +4,9 @@ body {
   font-family: sans-serif;
 }
 
+h2 {
+  margin-top: 0;
+}
 
 .content {
   max-width: 460px;
@@ -20,4 +23,22 @@ body {
   float: right;
   width: 200px;
   margin: 20px;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+}
+
+.sidebar {
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  padding: 0 30px;
+}
+
+.is-active {
+  color: gold;
+  transition: all 0.3s ease;
+  transform: scale(1.1);
 }
